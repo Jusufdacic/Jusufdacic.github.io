@@ -1,10 +1,15 @@
 # Digitization of Speech Signals: A Practical Application of Spectrogram Analysis
 
 **Author:** Jusuf Dacic
+
 **Course:** Digital Signal Processing, Faculty of Traffic and Communications, University of Sarajevo
+
 **Date:** June 2025
+
 **Grade:** 10/10
+
 **Tools:** MATLAB
+
 
 ## Description
 
