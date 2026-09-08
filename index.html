@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jusuf Dacic - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
+
+        body {
+            font-family: 'Barlow', Arial, Helvetica, sans-serif;
+            background-color: #07090b;
+            color: #9db0ab;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', Georgia, serif;
+            color: #e4efed;
+            letter-spacing: 0.5px;
+        }
+
+        /* ================= GEARS (dekoracija) ================= */
+        .gear {
+            position: absolute;
+            fill: none;
+            stroke: #b08d57;
+            opacity: 0.16;
+            pointer-events: none;
+        }
+
+        .gear-spin {
+            animation: spin 60s linear infinite;
+            transform-origin: center;
+        }
+
+        .gear-spin-reverse {
+            animation: spin 45s linear infinite reverse;
+            transform-origin: center;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .gear-spin, .gear-spin-reverse { animation: none; }
+        }
+
+        /* ================= NAVIGACIJA ================= */
+        nav {
+            background-color: rgba(7, 9, 11, 0.94);
+            border-bottom: 1px solid #241d13;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2de8d4;
+            border: 1px solid #2de8d4;
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(45, 232, 212, 0.3), inset 0 0 10px rgba(45, 232, 212, 0.12);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(45, 232, 212, 0.22), inset 0 0 8px rgba(45, 232, 212, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(45, 232, 212, 0.45), inset 0 0 14px rgba(45, 232, 212, 0.18);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .logo { animation: none; }
+        }
+
+        .logo::before,
+        .logo::after {
+            content: "";
+            position: absolute;
+            background-color: #b08d57;
+        }
+
+        .logo::before {
+            width: 1px;
+            height: 6px;
+            top: 3px;
+            left: 50%;
+        }
+
+        .logo::after {
+            width: 6px;
+            height: 1px;
+            top: 50%;
+            right: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 26px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #7e918c;
+            font-size: 15px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #2de8d4;
+            border-bottom-color: #2de8d4;
+        }
+
+        /* ================= HERO ================= */
+        header {
+            position: relative;
+            padding: 90px 0 70px 0;
+            border-bottom: 1px solid #241d13;
+            overflow: hidden;
+        }
+
+        .hero-gear-big {
+            top: -160px;
+            right: -140px;
+            width: 460px;
+            height: 460px;
+        }
+
+        .hero-gear-small {
+            bottom: -90px;
+            right: 180px;
+            width: 220px;
+            height: 220px;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 52px;
+            margin-bottom: 6px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-family: 'Barlow', sans-serif;
+            font-size: 19px;
+            font-weight: 500;
+            color: #2de8d4;
+            margin-bottom: 24px;
+            text-shadow: 0 0 14px rgba(45, 232, 212, 0.35);
+        }
+
+        header p {
+            max-width: 620px;
+            color: #8b9c97;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 26px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            cursor: pointer;
+            background-color: transparent;
+            border: 1px solid #2de8d4;
+            color: #2de8d4;
+        }
+
+        .btn:hover {
+            background-color: #2de8d4;
+            color: #07090b;
+            box-shadow: 0 0 22px rgba(45, 232, 212, 0.45);
+        }
+
+        /* ================= SEKCIJE ================= */
+        section {
+            position: relative;
+            padding: 62px 0;
+            border-bottom: 1px solid #241d13;
+            overflow: hidden;
+            scroll-margin-top: 72px;
+        }
+
+        section.alt {
+            background-color: #0b0f11;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 34px;
+        }
+
+        .numeral {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            color: #b08d57;
+            border: 1px solid #3a2e22;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-head h2 {
+            font-size: 26px;
+        }
+
+        .section-head::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, #3a2e22, transparent);
+        }
+
+        /* ================= ABOUT ================= */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.55fr 1fr;
+            gap: 54px;
+        }
+
+        .facts div {
+            border-left: 2px solid #2de8d4;
+            padding-left: 14px;
+            margin-bottom: 18px;
+        }
+
+        .facts .label {
+            font-size: 12px;
+            color: #b08d57;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .facts .value {
+            font-size: 15px;
+            color: #cddbd7;
+            margin-top: 1px;
+        }
+
+        /* ================= SKILLS ================= */
+        .skills-flex {
+            display: flex;
+            gap: 46px;
+            flex-wrap: wrap;
+        }
+
+        .skills-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .skills-col h3 {
+            font-size: 15px;
+            margin-bottom: 16px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 6px 13px;
+            font-size: 13px;
+            border: 1px solid;
+        }
+
+        .tag-software {
+            border-color: rgba(45, 232, 212, 0.45);
+            color: #2de8d4;
+            background-color: rgba(45, 232, 212, 0.06);
+        }
+
+        .tag-network {
+            border-color: rgba(176, 141, 87, 0.5);
+            color: #d4b374;
+            background-color: rgba(176, 141, 87, 0.07);
+        }
+
+        .section-intro {
+            color: #b08d57;
+            font-size: 14px;
+            letter-spacing: 0.4px;
+            margin-bottom: 26px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #241d13;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #2de8d4;
+            background-color: rgba(45, 232, 212, 0.08);
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+
+        .card strong {
+            color: #cddbd7;
+            font-weight: 600;
+        }
+
+        /* ================= KARTICE ================= */
+        .card {
+            position: relative;
+            background-color: #0d1215;
+            border: 1px solid #1c2529;
+            border-left: 2px solid #2de8d4;
+            padding: 28px;
+            margin-bottom: 20px;
+            transition: border-left-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            box-shadow: -3px 0 18px rgba(45, 232, 212, 0.18);
+        }
+
+        .card.brass:hover {
+            box-shadow: -3px 0 18px rgba(176, 141, 87, 0.2);
+        }
+
+        .card:last-child {
+            margin-bottom: 0;
+        }
+
+        .card.brass {
+            border-left-color: #b08d57;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .card p {
+            color: #8b9c97;
+            margin-bottom: 18px;
+        }
+
+        .card-link {
+            color: #2de8d4;
+            font-weight: 600;
+            font-size: 15px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .card-link:hover {
+            border-bottom-color: #2de8d4;
+            text-shadow: 0 0 10px rgba(45, 232, 212, 0.4);
+        }
+
+        .meta {
+            color: #b08d57;
+            font-size: 12.5px;
+            letter-spacing: 0.6px;
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            padding: 4px 11px;
+            margin-bottom: 12px;
+            color: #d4b374;
+            border: 1px solid #3a2e22;
+            background-color: rgba(176, 141, 87, 0.08);
+        }
+
+        /* ================= CONTACT ================= */
+        .contact-text {
+            display: block;
+            font-size: 17px;
+            color: #cddbd7;
+            margin-bottom: 8px;
+        }
+
+        .academic-gear {
+            top: 40px;
+            left: -110px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+        }
+
+        .tick-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .tick {
+            width: 1px;
+            height: 10px;
+            background-color: #3a2e22;
+        }
+
+        .tick.long {
+            height: 16px;
+            background-color: #b08d57;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            color: #5f6f6b;
+            font-size: 13px;
+            background-color: #0b0f11;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 900px) {
+            .container, .nav-flex {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            header h1 {
+                font-size: 40px;
+            }
+
+            .hero-gear-big {
+                width: 340px;
+                height: 340px;
+                right: -120px;
+            }
+
+            .hero-gear-small {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container, .nav-flex {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .nav-flex {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
+
+            .nav-links {
+                gap: 12px 18px;
+                font-size: 13px;
+                width: 100%;
+            }
+
+            header {
+                padding: 55px 0 45px 0;
+            }
+
+            header h1 {
+                font-size: 31px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            header p {
+                font-size: 15px;
+            }
+
+            section {
+                padding: 44px 0;
+                scroll-margin-top: 132px;
+            }
+
+            .section-head h2 {
+                font-size: 21px;
+            }
+
+            .btn {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .hero-gear-big {
+                width: 260px;
+                height: 260px;
+                top: -100px;
+                right: -100px;
+            }
+
+            .skills-flex {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-flex">
+            <div class="logo">JD</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#teaching">Teaching</a></li>
+                <li><a href="#engineering">Engineering</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <!-- veliki zupcanik -->
+        <svg class="gear gear-spin hero-gear-big" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="76" stroke-width="1.5"/>
+            <circle cx="100" cy="100" r="58" stroke-width="1"/>
+            <circle cx="100" cy="100" r="20" stroke-width="1.5"/>
+            <g stroke-width="1.5">
+                <rect x="94" y="8" width="12" height="18"/>
+                <rect x="94" y="174" width="12" height="18"/>
+                <rect x="8" y="94" width="18" height="12"/>
+                <rect x="174" y="94" width="18" height="12"/>
+                <rect x="94" y="8" width="12" height="18" transform="rotate(45 100 100)"/>
+                <rect x="94" y="174" width="12" height="18" transform="rotate(45 100 100)"/>
+                <rect x="8" y="94" width="18" height="12" transform="rotate(45 100 100)"/>
+                <rect x="174" y="94" width="18" height="12" transform="rotate(45 100 100)"/>
+                <rect x="94" y="8" width="12" height="18" transform="rotate(22.5 100 100)"/>
+                <rect x="94" y="174" width="12" height="18" transform="rotate(22.5 100 100)"/>
+                <rect x="8" y="94" width="18" height="12" transform="rotate(22.5 100 100)"/>
+                <rect x="174" y="94" width="18" height="12" transform="rotate(22.5 100 100)"/>
+                <rect x="94" y="8" width="12" height="18" transform="rotate(67.5 100 100)"/>
+                <rect x="94" y="174" width="12" height="18" transform="rotate(67.5 100 100)"/>
+                <rect x="8" y="94" width="18" height="12" transform="rotate(67.5 100 100)"/>
+                <rect x="174" y="94" width="18" height="12" transform="rotate(67.5 100 100)"/>
+            </g>
+            <line x1="100" y1="100" x2="100" y2="46" stroke-width="2"/>
+            <line x1="100" y1="100" x2="138" y2="118" stroke-width="2"/>
+        </svg>
+
+        <!-- mali zupcanik -->
+        <svg class="gear gear-spin-reverse hero-gear-small" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="70" stroke-width="2"/>
+            <circle cx="100" cy="100" r="24" stroke-width="2"/>
+            <g stroke-width="2">
+                <rect x="90" y="14" width="20" height="20"/>
+                <rect x="90" y="166" width="20" height="20"/>
+                <rect x="14" y="90" width="20" height="20"/>
+                <rect x="166" y="90" width="20" height="20"/>
+                <rect x="90" y="14" width="20" height="20" transform="rotate(45 100 100)"/>
+                <rect x="90" y="166" width="20" height="20" transform="rotate(45 100 100)"/>
+                <rect x="14" y="90" width="20" height="20" transform="rotate(45 100 100)"/>
+                <rect x="166" y="90" width="20" height="20" transform="rotate(45 100 100)"/>
+            </g>
+        </svg>
+
+        <div class="container hero-inner">
+            <h1>Jusuf Dacic</h1>
+            <p class="subtitle">Communications Engineer · Software Developer · Researcher</p>
+            <p>I work on wireless communications, signal processing and network security, and build the software systems that support them. Currently pursuing a master's degree at the Faculty of Traffic and Communications, University of Sarajevo.</p>
+            <a href="https://github.com/Jusufdacic" target="_blank" class="btn">View GitHub</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-head">
+                <span class="numeral">I</span>
+                <h2>About</h2>
+            </div>
+            <div class="about-grid">
+                <p>I graduated from the Faculty of Traffic and Communications at the University of Sarajevo with a Silver Badge for academic distinction, majoring in Computer and Information Technologies, and I am now continuing towards a master's degree. My work sits between two fields that rarely overlap: the communication systems that carry data, and the software that runs on top of them. I research wireless communications, signal processing and network security, build full-stack applications, and have recently been invited to teach as a demonstrator.</p>
+                <div class="facts">
+                    <div>
+                        <div class="label">Location</div>
+                        <div class="value">Sarajevo, Bosnia and Herzegovina</div>
+                    </div>
+                    <div>
+                        <div class="label">Degree</div>
+                        <div class="value">Engineer of Traffic and Communications — Computer and Information Technologies</div>
+                    </div>
+                    <div>
+                        <div class="label">GPA</div>
+                        <div class="value">9.07 / 10</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="alt">
+        <svg class="gear gear-spin-reverse academic-gear" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="72" stroke-width="1.5"/>
+            <circle cx="100" cy="100" r="52" stroke-width="1"/>
+            <circle cx="100" cy="100" r="18" stroke-width="1.5"/>
+            <g stroke-width="1.5">
+                <rect x="92" y="12" width="16" height="18"/>
+                <rect x="92" y="170" width="16" height="18"/>
+                <rect x="12" y="92" width="18" height="16"/>
+                <rect x="170" y="92" width="18" height="16"/>
+                <rect x="92" y="12" width="16" height="18" transform="rotate(45 100 100)"/>
+                <rect x="92" y="170" width="16" height="18" transform="rotate(45 100 100)"/>
+                <rect x="12" y="92" width="18" height="16" transform="rotate(45 100 100)"/>
+                <rect x="170" y="92" width="18" height="16" transform="rotate(45 100 100)"/>
+            </g>
+        </svg>
+        <div class="container">
+            <div class="section-head">
+                <span class="numeral">II</span>
+                <h2>Research</h2>
+            </div>
+
+            <p class="section-intro">Wireless communications · Digital signal processing · Aviation security · Machine learning for communication systems</p>
+
+            <div class="card brass">
+                <h3>Robustness and Limitations of ML/DL ADS-B Spoofing Detectors: A Review of Open Problems</h3>
+                <span class="badge">2026 · In Progress</span>
+                <div class="meta">Aviation Security &nbsp;·&nbsp; ADS-B &nbsp;·&nbsp; Machine Learning &nbsp;·&nbsp; Literature Review</div>
+                <p>A review of machine learning and deep learning approaches to detecting spoofed ADS-B signals in air traffic communication. The paper examines how robust these detectors remain against evasive attacks, and identifies the problems that stay unresolved across the current literature. Being prepared for ATCT, the International Conference on Advances in Traffic and Communication Technologies, organised annually by the Faculty of Traffic and Communications, University of Sarajevo.</p>
+            </div>
+
+            <div class="card brass">
+                <h3>Digitization of Speech Signals: A Practical Application of Spectrogram Analysis</h3>
+                <span class="badge">2025 · Undergraduate Academic Project</span>
+                <div class="meta">Digital Signal Processing &nbsp;·&nbsp; MATLAB &nbsp;·&nbsp; Grade 10/10</div>
+                <p>Analog-to-digital conversion and short-time Fourier analysis applied to real speech recordings, comparing normal, whispered and raised-pitch speech across the time and frequency domains, with Butterworth filtering and signal reconstruction.</p>
+                <a href="https://github.com/Jusufdacic/Jusufdacic.github.io/blob/main/digitalizacija-govora/digitalna-obrada-govora.pdf" target="_blank" class="card-link">Read the Full Paper</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="teaching">
+        <div class="container">
+            <div class="section-head">
+                <span class="numeral">III</span>
+                <h2>Teaching</h2>
+            </div>
+
+            <div class="card">
+                <h3>Teaching Demonstrator</h3>
+                <span class="badge">2026</span>
+                <div class="meta">Faculty of Traffic and Communications, University of Sarajevo</div>
+                <p>Invited to assist in teaching two undergraduate courses: <strong>Wireless Communication Systems</strong> and <strong>Communication Technology</strong>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="engineering" class="alt">
+        <div class="container">
+            <div class="section-head">
+                <span class="numeral">IV</span>
+                <h2>Engineering</h2>
+            </div>
+
+            <div class="card">
+                <h3>SportBook</h3>
+                <span class="badge">2025</span>
+                <div class="meta">ASP.NET Core &nbsp;·&nbsp; Entity Framework Core &nbsp;·&nbsp; SQL Server &nbsp;·&nbsp; Flutter</div>
+                <p>A full-stack sports facility booking platform. A REST API with JWT authentication, role-based authorization and BCrypt password hashing, backed by SQL Server through Entity Framework Core, paired with a Flutter mobile client. Users book courts, rent equipment and leave reviews; administrators generate time slots, block courts, and scan reservation QR codes for on-site check-in.</p>
+                <a href="https://github.com/Jusufdacic/sportbook" target="_blank" class="card-link">View Repository</a>
+            </div>
+
+            <div class="card">
+                <h3>JavaScript Fundamentals</h3>
+                <span class="badge">2025</span>
+                <div class="meta">Vanilla JavaScript &nbsp;·&nbsp; DOM &nbsp;·&nbsp; REST</div>
+                <p>Algorithmic problem-solving, DOM manipulation and REST API integration exercises written without frameworks — including a solved Trapping Rain Water (LeetCode Hard), Mastermind scoring that handles repeated digits correctly, and a full CRUD client built on <code>fetch</code>.</p>
+                <a href="https://github.com/Jusufdacic/javascript-fundamentals" target="_blank" class="card-link">View Repository</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-head">
+                <span class="numeral">V</span>
+                <h2>Technical Skills</h2>
+            </div>
+            <div class="skills-flex">
+                <div class="skills-col">
+                    <h3>Software</h3>
+                    <div class="tag-list">
+                        <span class="tag tag-software">C#</span>
+                        <span class="tag tag-software">ASP.NET Core</span>
+                        <span class="tag tag-software">JavaScript</span>
+                        <span class="tag tag-software">HTML/CSS</span>
+                        <span class="tag tag-software">Python</span>
+                        <span class="tag tag-software">Java</span>
+                        <span class="tag tag-software">Flutter</span>
+                    </div>
+
+                    <h3 style="margin-top:24px;">Data</h3>
+                    <div class="tag-list">
+                        <span class="tag tag-software">SQL Server</span>
+                        <span class="tag tag-software">Entity Framework Core</span>
+                    </div>
+                </div>
+                <div class="skills-col">
+                    <h3>Networks &amp; Systems</h3>
+                    <div class="tag-list">
+                        <span class="tag tag-network">VLANs</span>
+                        <span class="tag tag-network">Routing</span>
+                        <span class="tag tag-network">STP</span>
+                        <span class="tag tag-network">DHCP</span>
+                        <span class="tag tag-network">ACLs</span>
+                        <span class="tag tag-network">NAT</span>
+                        <span class="tag tag-network">WLAN</span>
+                        <span class="tag tag-network">IPv4/IPv6 Subnetting</span>
+                    </div>
+
+                    <h3 style="margin-top:24px;">Tools</h3>
+                    <div class="tag-list">
+                        <span class="tag tag-network">Git</span>
+                        <span class="tag tag-network">MATLAB</span>
+                        <span class="tag tag-network">Cisco Packet Tracer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="alt">
+        <div class="container">
+            <div class="section-head">
+                <span class="numeral">VI</span>
+                <h2>Contact</h2>
+            </div>
+            <div class="contact-info">
+                <span class="contact-text">jusuf.dacic@fsk.unsa.ba</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="tick-row">
+            <span class="tick"></span>
+            <span class="tick"></span>
+            <span class="tick long"></span>
+            <span class="tick"></span>
+            <span class="tick"></span>
+        </div>
+        <p>Jusuf Dacic — Sarajevo, Bosnia and Herzegovina</p>
+    </footer>
+
+</body>
+</html>
